@@ -23,7 +23,8 @@ func TestGoodAndEvil(t *testing.T) {
 	}
 	preview, crowns, boots, weapons := 0, map[int]int{}, map[int]int{}, map[int]int{}
 	for id, it := range c.Items {
-		ge := strings.Contains(it.Name["en"], "of Good and Evil (")
+		// The gear, not the refining hammers that share its name.
+		ge := strings.Contains(it.Name["en"], "of Good and Evil (") && (it.Type == "Armor" || it.Type == "Weapon")
 		if it.Preview {
 			preview++
 			if !strings.Contains(it.Name["pt"], "(em breve)") || len(it.Desc["pt"]) == 0 {
